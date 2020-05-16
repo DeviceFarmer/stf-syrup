@@ -1,5 +1,5 @@
 {
-  "name": "stf-syrup",
+  "name": "@devicefarmer/stf-syrup",
   "version": "1.0.0",
   "description": "Promise-based, configuration-less dependency injection.",
   "keywords": [
