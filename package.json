@@ -40,7 +40,7 @@
     "mocha": "~1.17.1",
     "chai": "~1.10.0",
     "sinon": "~1.9.0",
-    "sinon-chai": "~2.5.0"
+    "sinon-chai": "~2.14.0"
   },
   "engines": {
     "node": ">= 0.10"
