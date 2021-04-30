@@ -28,7 +28,7 @@
     "test": "gulp test --require coffee-script/register"
   },
   "dependencies": {
-    "bluebird": "~1.1.0",
+    "bluebird": "~3.7.2",
     "lodash": "~2.4.1"
   },
   "devDependencies": {
