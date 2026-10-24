@@ -27,3 +27,7 @@ updates:
   - dependency-name: lodash
     versions:
     - 4.17.20
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
