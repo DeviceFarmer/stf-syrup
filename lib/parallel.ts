@@ -1,6 +1,4 @@
-import assert from 'assert'
-
-import type SerialFactory from './serial'
+import assert = require('assert')
 
 /**
  * The function a Syrup module is defined with. It receives the options
@@ -100,8 +98,20 @@ class ParallelSyrup<T = unknown, B = unknown> implements DependencyLike {
       return this.resolved
     }
     // Every dependency's consume() is called synchronously here, so a
-    // dependency that throws makes consume() throw rather than reject.
-    const pending = this.dependencies.map(dep => dep.consume(overrides))
+    // dependency that throws makes consume() throw rather than reject. The
+    // promises the earlier ones already returned would then reach nobody, so
+    // they get a handler to keep a rejection among them from crashing Node.js.
+    const pending: PromiseLike<unknown>[] = []
+    try {
+      for (const dep of this.dependencies) {
+        pending.push(dep.consume(overrides))
+      }
+    } catch (error) {
+      for (const promise of pending) {
+        promise.then(undefined, () => {})
+      }
+      throw error
+    }
     this.resolved = Promise.all(pending).then(
       results => this.invoke(overrides, ...results) as unknown as T
     )
@@ -141,9 +151,6 @@ namespace syrup {
   export type Syrup<T = unknown, B = unknown> = ParallelSyrup<T, B>
   export type Body<R> = BodyFn<R>
   export type Dependency = DependencyLike
-  // Set by the package entry point (lib/syrup), which attaches the serial
-  // factory to this very function.
-  export declare let serial: typeof SerialFactory
 }
 
 export = syrup

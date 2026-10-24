@@ -14,7 +14,7 @@
 
 ## Requirements
 
-* [Node.js](https://nodejs.org/) 22 or newer. Older versions are not supported.
+* [Node.js](https://nodejs.org/) 22.18 or newer. Older versions are not supported.
 
 ## Getting started
 

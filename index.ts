@@ -1,3 +1,3 @@
-import syrup from './lib/syrup'
+import syrup = require('./lib/syrup')
 
 export = syrup

@@ -18,6 +18,15 @@ export default tseslint.config(
     extends: [tseslint.configs.recommended]
   },
   {
+    files: ['index.ts', 'lib/**/*.ts'],
+    rules: {
+      // The sources are CommonJS modules with `export =`. Importing them with
+      // `import x = require()` keeps the emitted declarations usable without
+      // esModuleInterop, which a default import would not.
+      '@typescript-eslint/no-require-imports': 'off'
+    }
+  },
+  {
     files: ['test/**/*.mts'],
     languageOptions: {
       globals: { ...globals.node, ...globals.mocha }

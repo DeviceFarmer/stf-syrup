@@ -495,6 +495,24 @@ describe('ParallelSyrup ordering', () => {
     expect(await rejection(value)).to.have.property('message', 'dep1')
     expect(dep2.consume).to.have.been.calledOnce
   })
+
+  it('should handle the earlier promises when a later dependency throws', () => {
+    const pending = { then: sinon.spy() }
+    const error = new Error('dep2')
+    const dep1 = { consume: () => pending }
+    const dep2 = {
+      consume: () => {
+        throw error
+      }
+    }
+    const main = parallel()
+      .dependency(dep1)
+      .dependency(dep2)
+      .define(() => {})
+    expect(() => main.consume()).to.throw(error)
+    expect(pending.then).to.have.been.calledOnce
+    expect(pending.then.firstCall.args[1]).to.be.a('function')
+  })
 })
 
 describe('SerialSyrup ordering', () => {

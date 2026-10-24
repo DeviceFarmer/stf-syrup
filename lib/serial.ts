@@ -1,4 +1,4 @@
-import parallel from './parallel'
+import parallel = require('./parallel')
 
 /**
  * A module whose dependencies are consumed one after another, in the order
@@ -15,23 +15,29 @@ class SerialSyrup<T = unknown, B = unknown> extends parallel.Syrup<T, B> {
     if (this.resolved) {
       return this.resolved
     }
-    let cursor = 0
-    const results: unknown[] = []
-    // The length is read again on every step, and the first dependency is
-    // consumed synchronously, like the original implementation.
-    const next = (): PromiseLike<unknown[]> => {
-      if (cursor < this.dependencies.length) {
-        return this.dependencies[cursor++]!.consume(overrides).then(value => {
-          results.push(value)
-          return next()
-        })
-      }
-      return Promise.resolve(results)
-    }
-    this.resolved = Promise.resolve(next()).then(
+    // The first dependency is consumed synchronously, like the original
+    // implementation, so one that throws makes consume() throw rather than
+    // reject. The length is read again on every step.
+    const first = this.dependencies[0]?.consume(overrides)
+    this.resolved = this.consumeRest(first, overrides).then(
       results => this.invoke(overrides, ...results) as unknown as T
     )
     return this.resolved
+  }
+
+  private async consumeRest(
+    first: PromiseLike<unknown> | undefined,
+    overrides?: object
+  ): Promise<unknown[]> {
+    const results: unknown[] = []
+    if (!first) {
+      return results
+    }
+    results.push(await first)
+    for (let i = 1; i < this.dependencies.length; i++) {
+      results.push(await this.dependencies[i]!.consume(overrides))
+    }
+    return results
   }
 }
 
