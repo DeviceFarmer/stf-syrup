@@ -20,11 +20,12 @@
   "main": "./index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DeviceFarmer/stf-syrup/stf-syrup.git"
+    "url": "git+https://github.com/DeviceFarmer/stf-syrup.git"
   },
   "scripts": {
+    "build": "gulp compile --require coffee-script/register",
     "postpublish": "gulp postpublish --require coffee-script/register",
-    "prepublish": "gulp prepublish --require coffee-script/register",
+    "prepublishOnly": "gulp prepublish --require coffee-script/register",
     "test": "gulp test --require coffee-script/register"
   },
   "dependencies": {

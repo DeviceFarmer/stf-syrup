@@ -1,0 +1,17 @@
+# Changelog
+
+## 1.0.3 (2024-11-26)
+
+* Upgrade to GitHub-native Dependabot by @dependabot-preview in https://github.com/DeviceFarmer/stf-syrup/pull/37
+* Update os_image to ubuntu2004 in CI config by @koral-- in https://github.com/DeviceFarmer/stf-syrup/pull/67
+* update lodash package to fix vulnerabilities by @denis99999 in https://github.com/DeviceFarmer/stf-syrup/pull/66
+
+### New Contributors
+
+* @denis99999 made their first contribution in https://github.com/DeviceFarmer/stf-syrup/pull/66
+
+**Full Changelog**: https://github.com/DeviceFarmer/stf-syrup/compare/v1.0.2...v1.0.3
+
+## 1.0.2 (2021-03-09)
+
+* Dependency updates
