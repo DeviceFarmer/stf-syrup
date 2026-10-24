@@ -1,5 +1,7 @@
+/*.tgz
 /node_modules/
-/lib/
 /temp/
+/lib/**/*.d.ts
+/lib/**/*.js
 /index.js
-package-lock.json
+/index.d.ts

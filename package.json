@@ -23,27 +23,34 @@
     "url": "git+https://github.com/DeviceFarmer/stf-syrup.git"
   },
   "scripts": {
-    "build": "gulp compile --require coffee-script/register",
-    "postpublish": "gulp postpublish --require coffee-script/register",
-    "prepublishOnly": "gulp prepublish --require coffee-script/register",
-    "test": "gulp test --require coffee-script/register"
+    "compile": "tsc -p .",
+    "format": "prettier --write . && eslint . --fix",
+    "lint": "eslint . && prettier --check .",
+    "prepublishOnly": "npm run compile && npm run test",
+    "test": "mocha"
   },
-  "dependencies": {
-    "bluebird": "~1.1.0",
-    "lodash": "~4.17.20"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "coffee-script": "~1.12.7",
-    "gulp": "~3.5.5",
-    "gulp-coffee": "~1.4.1",
-    "gulp-clean": "~0.4.0",
-    "gulp-mocha": "~0.4.1",
-    "mocha": "~1.17.1",
-    "chai": "~1.10.0",
-    "sinon": "~1.9.0",
-    "sinon-chai": "~2.5.0"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.5",
+    "chai": "^6.3.0",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "mocha": "^12.0.3",
+    "prettier": "^3.9.10",
+    "sinon": "^22.1.0",
+    "sinon-chai": "^4.0.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.0"
   },
   "engines": {
-    "node": ">= 0.10"
-  }
+    "node": ">= 22"
+  },
+  "files": [
+    "/lib/**/*.js",
+    "/lib/**/*.d.ts",
+    "/index.js",
+    "/index.d.ts"
+  ],
+  "types": "./index.d.ts"
 }
