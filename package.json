@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "bluebird": "~1.1.0",
-    "lodash": "~4.17.20"
+    "lodash": "~4.18.1"
   },
   "devDependencies": {
     "coffee-script": "~1.12.7",
