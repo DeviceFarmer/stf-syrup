@@ -26,7 +26,8 @@
     "compile": "tsc -p .",
     "format": "prettier --write . && eslint . --fix",
     "lint": "eslint . && prettier --check . && tsc -p test",
-    "prepublishOnly": "npm run compile && npm run test",
+    "prepublishOnly": "npm test",
+    "pretest": "npm run compile",
     "test": "mocha"
   },
   "devDependencies": {
@@ -47,7 +48,7 @@
     "typescript-eslint": "^8.72.0"
   },
   "engines": {
-    "node": ">= 22.18"
+    "node": ">= 22"
   },
   "files": [
     "/lib/**/*.js",

@@ -7,7 +7,7 @@ We are happy to accept any contributions that make sense and respect the rules l
 1. Fork the repo.
 2. Create a feature branch for your contribution out of the `master` branch. Only one contribution per branch is accepted.
 3. Implement your contribution while respecting our rules (see below).
-4. Run `npm run compile`, `npm run lint` and `npm test` to make sure you didn't break anything. The tests run against the compiled JavaScript, so compile first. CI runs all three on every pull request.
+4. Run `npm run lint` and `npm test` to make sure you didn't break anything. The tests run against the compiled JavaScript, so `npm test` compiles first. You need [Node.js](https://nodejs.org/) 22.18 or newer, the first 22.x that strips types from the `.mts` tests by default; the published package itself runs on any Node.js 22. CI runs both on every pull request.
 5. Add tests for your contribution so that no one else will break it.
 6. Submit a pull request against our `master` branch!
 
